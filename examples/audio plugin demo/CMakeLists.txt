@@ -37,6 +37,14 @@ get_filename_component(JuceDemoPlugin_jucer_DIR "${JuceDemoPlugin_jucer_FILE}" D
 file(COPY "${JuceDemoPlugin_jucer_DIR}/Source" DESTINATION "${CMAKE_CURRENT_LIST_DIR}")
 
 
+if(WIN32)
+  set(VST3_SDK_FOLDER "C:/SDKs/VST3 SDK")
+else()
+  set(VST3_SDK_FOLDER "~/SDKs/VST3 SDK")
+endif()
+set(VST3_SDK_FOLDER "${VST3_SDK_FOLDER}" CACHE PATH "VST3 SDK Folder")
+
+
 jucer_project_begin(
   PROJECT_NAME "JuceDemoPlugin"
   PROJECT_VERSION "1.0.0"
@@ -51,6 +59,7 @@ jucer_project_begin(
 
 jucer_audio_plugin_settings(
   BUILD_VST ON
+  BUILD_VST3 ON
   BUILD_AUDIOUNIT ON
   PLUGIN_NAME "Juce Demo Plugin"
   PLUGIN_DESCRIPTION "Juce Demo Plugin"
